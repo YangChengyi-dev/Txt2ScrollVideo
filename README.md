@@ -5,6 +5,8 @@
 ## 功能特点
 
 - **Markdown 支持**: 自动识别多级标题（# 到 ######）和加粗文本（** 或 __）。
+- **颜色标注**: 支持红、绿两种颜色的局部文字标注。
+- **灵活对齐**: 支持左对齐、右对齐和居中对齐，并可自定义边距。
 - **动态样式**: 不同层级的标题会自动调整字号，并应用加粗样式。
 - **自动忽略视频**: 预置 `.gitignore` 配置，生成的 `.mp4` 文件不会被误提交。
 - **中文友好**: 默认支持微软雅黑等 Windows 中文字体。
@@ -36,9 +38,16 @@ pip install -r requirements.txt
 # 这是一个标题
 ## 这是一个副标题
 这是**加粗**的正文。
+这是一段 [r]红色文字[/r] 和 [g]绿色文字[/g]。
 ```
 
-### 2. 运行脚本
+### 3. 颜色标签说明
+
+- `[r]文本[/r]`: 将文本设置为**红色**。
+- `[g]文本[/g]`: 将文本设置为**绿色**。
+- 支持同一行内多种颜色混排。
+
+### 4. 运行脚本
 
 修改 [main.py](file:///d:/ProjectTRAE/dev_daily/Txt2ScrollVideo/main.py) 中的输入文件路径，然后运行：
 
@@ -46,19 +55,24 @@ pip install -r requirements.txt
 python main.py
 ```
 
-### 3. 代码调用示例
+### 5. 代码调用示例
 
 ```python
 from main import create_scrolling_text_video
 
-# 转换为视频
+# 转换为视频 (居中对齐)
 create_scrolling_text_video(
     input_file="test_markdown.md", 
-    output_file="output_video.mp4",
-    video_width=1280,   # 视频宽度
-    video_height=720,   # 视频高度
-    fps=30,             # 帧率
-    scroll_speed=2      # 滚动速度（像素/帧）
+    output_file="output_center.mp4",
+    text_align='center'
+)
+
+# 转换为视频 (左对齐，设置边距)
+create_scrolling_text_video(
+    input_file="test_markdown.md", 
+    output_file="output_left.mp4",
+    text_align='left',
+    margin=100
 )
 ```
 
